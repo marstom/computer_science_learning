@@ -7,7 +7,9 @@
  * Usage:
  *
  * spellchecker < file.txt
- *
+ * perfc++
+ * assert.h do testow
+ * google.test
  */
 
 #include <iostream>
@@ -15,19 +17,20 @@
 #include <string>
 #include <fstream>
 #include <algorithm>
+#include <cassert>
 
 using namespace std;
 
 struct BstNode{
     string data;
-    BstNode* left;
-    BstNode* right;
+    BstNode* smaller = NULL;
+    BstNode* greater = NULL;
 };
 
 BstNode* GetNewNode(string data){
     BstNode* newNode = new BstNode();
     newNode->data = data;
-    newNode->left = newNode->right = NULL;
+    newNode->smaller = newNode->greater = NULL;
     return newNode;
 }
 
@@ -36,10 +39,10 @@ BstNode* Insert(BstNode* root, string data) {
             root = GetNewNode(data);
 	}
 	else if(data <= root->data) {
-		root->left = Insert(root->left,data);
+		root->smaller = Insert(root->smaller,data);
 	}
 	else {
-		root->right = Insert(root->right,data);
+		root->greater = Insert(root->greater,data);
 	}
 	return root;
 }
@@ -53,28 +56,28 @@ bool Search(BstNode* root, string data) {
 		return true;
 	}
 	else if(data <= root->data) {
-		return Search(root->left,data);
+		return Search(root->smaller,data);
 	}
 	else {
-		return Search(root->right,data);
+		return Search(root->greater,data);
 	}
 }
 
-BstNode* read_whole_pl_dictionary(BstNode* bigDictionary){
+void read_whole_pl_dictionary(BstNode* bigDictionary){
     /*
      * read file with dictionary.
      * */
     ifstream inputFile;
     string line;
-    inputFile.open("slowa.txt");
-    //inputFile.open("../Python/scrabblehelper/slowa.txt"); // >2M words!!! C++ is slower than python :(
+    //inputFile.open("slowa.txt");
+    inputFile.open("./scrabblehelper_set/slowa.txt"); // >2M words!!! C++ is slower than python :(
 
     while(getline(inputFile, line)){
         Insert(bigDictionary, line);
     }
+    printf("Wczytano plik\n");
 
     inputFile.close();
-    return bigDictionary;
 }
 
 void spell_checker(BstNode *dict){
@@ -113,6 +116,8 @@ void test1(){
 
     string st1 = "Anka";
     string st2 = "Ankb";
+    assert (1==1);
+    assert (0==1);
 
     cout << '\n' <<(bool)(st1>st2);
 
@@ -122,7 +127,7 @@ int main(){
     //test1();
     // BstNode *bigDictionary = NULL; // why not works??
     BstNode *bigDictionary = new BstNode();
-    bigDictionary = read_whole_pl_dictionary(bigDictionary);
+    read_whole_pl_dictionary(bigDictionary);
     spell_checker(bigDictionary);
     return 0;
 }

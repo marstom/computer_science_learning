@@ -1,4 +1,6 @@
 #include <iostream>
+#include <stdexcept>
+
 using namespace std;
 
 struct Node{
@@ -22,10 +24,27 @@ size_t size(LinkedList *linkedList){
 }
 
 //  bool returns true if empty
-void empty();
+bool empty(LinkedList* linkedList){
+    if(linkedList->start == NULL)
+        return true;
+    return false;
+}
 
 // returns the value of the nth item (starting at 0 for first)
-int value_at(int index);
+int value_at(LinkedList *linkedList, size_t index){
+    if(empty(linkedList)) throw std::runtime_error("list is empty"); //except
+    if(size(linkedList) < index) throw std::runtime_error("out of list index"); //except
+    Node* el = linkedList->start;
+    if(index == 0) return el->data;
+    size_t count = 0;
+    while(el){
+        el = el->next;
+        count++;
+        if(count == index)
+            return el->data;
+    } 
+    return -1;
+}
 
 // adds an item to the front of the list
 void push_front(LinkedList *linkedList, int value);
@@ -42,7 +61,12 @@ void push_back(LinkedList *linkedList, int value){
 }
 
 // removes end item and returns its value
-void pop_back();
+int pop_back(LinkedList *linkedList){
+    Node* el = linkedList->start;
+    int val = el->data;
+    delete(el);
+    return val;
+}
 
 // get value of front item
 void front();
@@ -65,19 +89,21 @@ void reverse();
 // removes the first item in the list with this value
 void remove_value(LinkedList *linkedList, int value){
     Node* el = linkedList->start;
+    if(el->data == value){
+        Node *tmp = linkedList->start;
+        linkedList->start = tmp->next;
+        delete(tmp);
+        
+    }
     while(el){
-        //if(el->next)
-        //Node* prev = el;
         if(el->next && el->next->data == value){
             Node* current = el;
             Node* next = el->next;
             current->next = next->next;
+            delete(next);
         }
         el=el->next;
     }
-    //Node* ptr = el;
-    //el = el->next; //todo free memeory
-
 }
 
 // print all elements

@@ -9,7 +9,7 @@ struct Node{
 };
 
 struct LinkedList{
-    Node* start;
+    Node* start = NULL;
 };
 
 //returns number of data elements in list
@@ -47,10 +47,33 @@ int value_at(LinkedList *linkedList, size_t index){
 }
 
 // adds an item to the front of the list
-void push_front(LinkedList *linkedList, int value);
+void push_front(LinkedList *linkedList, int value){
+    Node* el = new Node(); // todo test on empty list
+    el->data = value;
+
+    Node *last = linkedList->start;
+    while(last->next){last = last->next;}
+    last->next = el;
+}
 
 // remove front item and return its value
-void pop_front();
+int pop_front(LinkedList *linkedList){
+    Node *last = linkedList->start;
+
+    if(last->next == NULL){
+        int var = last->data;
+        delete last; // delete root
+        return var;
+    }
+    
+
+    while(last->next->next){last = last->next;}
+    Node *toDelete = last->next;
+    last->next = last->next->next;
+    int val = toDelete->data;
+    delete toDelete;
+    return val;
+}
 
 // adds an item at the end
 void push_back(LinkedList *linkedList, int value){
@@ -63,16 +86,24 @@ void push_back(LinkedList *linkedList, int value){
 // removes end item and returns its value
 int pop_back(LinkedList *linkedList){
     Node* el = linkedList->start;
+    Node* tmp = linkedList->start;
+    linkedList->start = tmp->next; // change address
     int val = el->data;
+    
     delete(el);
     return val;
 }
 
 // get value of front item
-void front();
+int front(LinkedList* linkedList){
+    return 0;
+}
 
 // get value of end item
-void back();
+int back(LinkedList* linkedList){
+    Node* el = linkedList->start;
+    return el->data;
+}
 
 // insert value at index, so current item at that index is pointed to by new item at index
 void insert(int index,int value);

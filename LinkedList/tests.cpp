@@ -73,8 +73,54 @@ void test_value_at(){
     cout << "passed\n";
 }
 
-void test_pip_back(){
+void test_pop_back(){
+    LinkedList* aa = new LinkedList();
+    push_back(aa, 1);
+    push_back(aa, 2);
+    push_back(aa, 3);
+    push_back(aa, 4);
+    push_back(aa, 5);
+    assert (pop_back(aa)==5);
+    assert (pop_back(aa)==4);
+    assert (pop_back(aa)==3);
+    print_whole_list(aa);
+    cout << "passed\n";
 
+}
+
+void test_front(){
+    LinkedList* aa = new LinkedList();
+    push_back(aa, 1);
+    push_back(aa, 2);
+    push_back(aa, 3);
+    assert (back(aa)==3);
+    assert (back(aa)==3);
+    print_whole_list(aa);
+    cout << "passed\n";
+}
+
+void test_push_front(){
+    LinkedList* aa = new LinkedList();
+    push_back(aa, 1);
+    push_back(aa, 2);
+    push_back(aa, 3);
+    push_front(aa, 4);
+    print_whole_list(aa);
+}
+
+void test_pop_front(){
+    LinkedList* aa = new LinkedList();
+    push_back(aa, 1);
+    push_back(aa, 2);
+    push_back(aa, 3);
+    assert (pop_front(aa)==1);
+    assert (pop_front(aa)==2);
+    assert (pop_front(aa)==3);
+    //push_back(aa, 1);
+    print_whole_list(aa); // mess from memory, because delete root
+}
+
+void test_front(){
 
 }
 
@@ -85,5 +131,9 @@ int main(){
     test_remove_value_first();
     test_empty();
     test_value_at();
+    test_pop_back();
+    test_front();
+    test_push_front();
+    test_pop_front();
     return 0;
 }

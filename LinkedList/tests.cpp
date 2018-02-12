@@ -88,7 +88,7 @@ void test_pop_back(){
 
 }
 
-void test_front(){
+void test_back(){
     LinkedList* aa = new LinkedList();
     push_back(aa, 1);
     push_back(aa, 2);
@@ -117,10 +117,60 @@ void test_pop_front(){
     assert (pop_front(aa)==2);
     assert (pop_front(aa)==3);
     //push_back(aa, 1);
-    print_whole_list(aa); // mess from memory, because delete root
+    print_whole_list(aa); // mess from memory, because delete rooti, is it ok?
 }
 
 void test_front(){
+    LinkedList* aa = new LinkedList();
+    push_back(aa, 1);
+    push_back(aa, 2);
+    push_back(aa, 3);
+    cout << "First value " << front(aa) << endl;
+    assert (front(aa) == 1);
+}
+
+void test_value_n_from_end(){
+    LinkedList* aa = new LinkedList();
+    push_back(aa, 1);
+    push_back(aa, 2);
+    push_back(aa, 3);
+    push_back(aa, 5);
+    push_back(aa, 6);
+    push_back(aa, 7);
+    cout << "start element =" << aa->start->data << endl;
+    print_whole_list(aa);
+    assert (value_n_from_end(aa, 0) == 1);
+    assert (value_n_from_end(aa, 2) == 3);
+    assert (value_n_from_end(aa, 5) == 7);
+    cout << "passed\n";
+
+}
+
+void test_reverse(){
+    LinkedList* aa = new LinkedList();
+    push_back(aa, 1);
+    push_back(aa, 2);
+    push_back(aa, 3);
+    push_back(aa, 5);
+    push_back(aa, 6);
+    push_back(aa, 7);
+    print_whole_list(aa);
+    assert (back(aa) == 7);
+    reverse(aa);
+    print_whole_list(aa);
+    assert (front(aa) == 7);
+}
+
+void test_erase(){
+    LinkedList* aa = new LinkedList();
+    push_back(aa, 1);
+    push_back(aa, 2);
+    push_back(aa, 3);
+    push_back(aa, 4);
+    push_back(aa, 5);
+    erase(aa, 4);
+    cout << "test erase \n";
+    print_whole_list(aa);
 
 }
 
@@ -132,8 +182,12 @@ int main(){
     test_empty();
     test_value_at();
     test_pop_back();
-    test_front();
+    test_back();
     test_push_front();
     test_pop_front();
+    test_front();
+    test_value_n_from_end();
+    test_reverse();
+    test_erase();
     return 0;
 }

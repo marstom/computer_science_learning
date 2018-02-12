@@ -66,8 +66,9 @@ int pop_front(LinkedList *linkedList){
         return var;
     }
     
-
-    while(last->next->next){last = last->next;}
+    while(last->next->next){
+        last = last->next;
+    }
     Node *toDelete = last->next;
     last->next = last->next->next;
     int val = toDelete->data;
@@ -89,14 +90,19 @@ int pop_back(LinkedList *linkedList){
     Node* tmp = linkedList->start;
     linkedList->start = tmp->next; // change address
     int val = el->data;
-    
     delete(el);
     return val;
 }
 
 // get value of front item
 int front(LinkedList* linkedList){
-    return 0;
+    Node* el = linkedList->start;
+    if(el->next == NULL) return el->data;
+    while(el->next){
+        el=el->next;
+    }
+    int var = el->data;
+    return var;
 }
 
 // get value of end item
@@ -109,13 +115,49 @@ int back(LinkedList* linkedList){
 void insert(int index,int value);
 
 // removes node at given index
-void erase(int index);
+void erase(LinkedList* linkedList, int index){
+    Node* el = linkedList->start;
+    int counter = 0;
+    if(index == 0){ pop_back(linkedList); return;}
+    for(;el;counter++){
+        if(counter == index-1){
+            // remove el
+            Node* current = el;
+            Node* next = el->next;
+            current->next = next->next;
+            delete next;
+        }
+        el = el->next;
+    }
+}
 
 // returns the value of the node at nth position from the end of the list
-int value_n_from_end(int n);
+int value_n_from_end(LinkedList* linkedList, int n){
+    int nn = size(linkedList) - n - 1;
+    Node *el = linkedList->start;
+    int counter = 0;
+    
+    for(;el && (counter != nn); counter++){
+        el = el->next;
+    }
+    
+    return el->data;
+}
 
 // reverses the list
-void reverse();
+void reverse(LinkedList* linkedList){
+    Node* el = linkedList->start;
+    Node* prev = NULL;
+    Node* current = el;
+    Node* next = el->next;
+    while(current){
+        next= current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    linkedList->start = prev;
+}
 
 // removes the first item in the list with this value
 void remove_value(LinkedList *linkedList, int value){
@@ -140,6 +182,10 @@ void remove_value(LinkedList *linkedList, int value){
 // print all elements
 void print_whole_list(LinkedList* linkedList){
     Node* el = linkedList->start;
+    if(el == NULL){
+        cout << "List is empty" << endl;
+        return;
+    }
     while(el){
         std::cout << el->data << ", ";
         el=el->next;

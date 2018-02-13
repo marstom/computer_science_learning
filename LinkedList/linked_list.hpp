@@ -43,12 +43,21 @@ int value_at(LinkedList *linkedList, size_t index){
         if(count == index)
             return el->data;
     } 
-    return -1;
+    throw std::runtime_error("List out of range.");
+}
+
+// adds an item at the end
+void push_back(LinkedList *linkedList, int value){
+    Node* el = new Node();
+    el->data = value;
+    el->next = linkedList->start;
+    linkedList->start = el;
 }
 
 // adds an item to the front of the list
 void push_front(LinkedList *linkedList, int value){
-    Node* el = new Node(); // todo test on empty list
+    if(linkedList->start == NULL) {push_back(linkedList, value); return;}
+    Node* el = new Node();
     el->data = value;
 
     Node *last = linkedList->start;
@@ -62,7 +71,7 @@ int pop_front(LinkedList *linkedList){
 
     if(last->next == NULL){
         int var = last->data;
-        delete last; // delete root
+        delete last;
         return var;
     }
     
@@ -76,19 +85,11 @@ int pop_front(LinkedList *linkedList){
     return val;
 }
 
-// adds an item at the end
-void push_back(LinkedList *linkedList, int value){
-    Node* el = new Node();
-    el->data = value;
-    el->next = linkedList->start;
-    linkedList->start = el;
-}
-
 // removes end item and returns its value
 int pop_back(LinkedList *linkedList){
     Node* el = linkedList->start;
     Node* tmp = linkedList->start;
-    linkedList->start = tmp->next; // change address
+    linkedList->start = tmp->next;
     int val = el->data;
     delete(el);
     return val;
@@ -112,7 +113,25 @@ int back(LinkedList* linkedList){
 }
 
 // insert value at index, so current item at that index is pointed to by new item at index
-void insert(int index,int value);
+void insert(LinkedList* linkedList, int index, int value){
+    Node* el = linkedList->start;
+    Node* current;
+    Node* next;
+    Node* newValue = new Node();
+    newValue->data = value;
+    int counter = 0;
+    while(el){
+        if(counter == index){
+            current = el;
+            next = el->next;
+            current->next = newValue;
+            newValue->next = next;
+        }
+        counter++;
+        el = el->next;
+    }
+
+}
 
 // removes node at given index
 void erase(LinkedList* linkedList, int index){

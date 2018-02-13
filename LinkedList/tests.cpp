@@ -108,6 +108,12 @@ void test_push_front(){
     print_whole_list(aa);
 }
 
+void test_push_front_empty(){
+    LinkedList* aa = new LinkedList();
+    push_front(aa, 12);
+    print_whole_list(aa);
+}
+
 void test_pop_front(){
     LinkedList* aa = new LinkedList();
     push_back(aa, 1);
@@ -174,6 +180,17 @@ void test_erase(){
 
 }
 
+void test_insert(){
+    LinkedList* aa = new LinkedList();
+    push_back(aa, 1);
+    push_back(aa, 2);
+    push_back(aa, 3);
+    push_back(aa, 4);
+    insert(aa, 1, 99);
+    cout << "insert value"<< size(aa) << endl;
+    print_whole_list(aa);
+}
+
 int main(){
     test_add();
     test_size();
@@ -189,5 +206,7 @@ int main(){
     test_value_n_from_end();
     test_reverse();
     test_erase();
+    test_insert();
+    test_push_front_empty();
     return 0;
 }

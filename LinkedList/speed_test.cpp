@@ -13,6 +13,8 @@
 #include <chrono>
 #include "linked_list.hpp"
 
+using namespace container::linked_list;
+
 #define BIG (50*1000000)
 
 using namespace std;

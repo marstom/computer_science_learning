@@ -4,6 +4,7 @@
 
 #include "linked_list.hpp"
 using namespace std;
+using namespace container::linked_list;
 
 void test_add(){
     LinkedList* aa = new LinkedList();

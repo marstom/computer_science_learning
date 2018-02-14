@@ -2,5 +2,6 @@
     "files.associations": {
         "type_traits": "cpp",
         "*.tcc": "cpp"
-    }
+    },
+    "python.pythonPath": "/home/tomek/.virtualenvs/python_games36/bin/python3"
 }

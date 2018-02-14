@@ -1,7 +1,10 @@
 #include <iostream>
 #include <stdexcept>
 
-using namespace std;
+// using namespace std;
+
+namespace container{
+namespace linked_list{
 
 struct Node{
     int data;
@@ -202,7 +205,7 @@ void remove_value(LinkedList *linkedList, int value){
 void print_whole_list(LinkedList* linkedList){
     Node* el = linkedList->start;
     if(el == NULL){
-        cout << "List is empty" << endl;
+        std::cout << "List is empty" << std::endl;
         return;
     }
     while(el){
@@ -212,3 +215,5 @@ void print_whole_list(LinkedList* linkedList){
     std::cout << '\n';
 }
 
+}
+}

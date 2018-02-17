@@ -97,89 +97,94 @@ public:
         return ss.str();
     }
 
+    // remove front item and return its value
+    T pop_front(){
+        Node<T> *last = head;
+
+        if(last->next == nullptr){
+            T var = last->data;
+            delete last;
+            return var;
+        }
+        
+        while(last->next->next){
+            last = last->next;
+        }
+        Node<T> *toDelete = last->next;
+        last->next = last->next->next;
+        T val = toDelete->data;
+        delete toDelete;
+        size--;
+        return val;
+    }
+
+    // get value of front item
+    T front(){
+        Node<T>* el = head;
+        if(el->next == nullptr) 
+            return el->data;
+
+        while(el->next)
+            el=el->next;
+
+        T var = el->data;
+        return var;
+    }
+
+    // get value of end item
+    T back(){
+        return head->data;
+    }
+
+    void change_value_at(size_t index){}
+
+    // removes node at given index
+    void erase(size_t index){
+        Node<T>* el = head;
+        if(index == 0){
+            pop_back();
+            return;
+        }
+
+        for(int counter = 0; el != nullptr; counter++){
+            if(counter == index-1){
+                Node<T>* current = el;
+                Node<T>* next = el->next;
+                current->next = next->next;
+                delete next;
+            }
+            el = el->next;
+        }
+        size--;
+    }
+
+    // insert value at index, so current item at that index is pointed to by new item at index
+    void insert(size_t index, T value){
+        Node<T>* el = head;
+        Node<T>* current;
+        Node<T>* next;
+        Node<T>* newValue = new Node<T>();
+        newValue->data = value;
+        int counter = 0;
+        while(el != nullptr){
+            if(counter == index){
+                current = el;
+                next = el->next;
+                current->next = newValue;
+                newValue->next = next;
+            }
+            counter++;
+            el = el->next;
+        }
+        size++;
+    }
+
 private:
     Node<T> *head = nullptr;
     size_t size = 0;
 };
 
 
-
-
-// // remove front item and return its value
-// int pop_front(LinkedList *linkedList){
-//     Node *last = linkedList->start;
-
-//     if(last->next == NULL){
-//         int var = last->data;
-//         delete last;
-//         return var;
-//     }
-    
-//     while(last->next->next){
-//         last = last->next;
-//     }
-//     Node *toDelete = last->next;
-//     last->next = last->next->next;
-//     int val = toDelete->data;
-//     delete toDelete;
-//     return val;
-// }
-
-
-// // get value of front item
-// int front(LinkedList* linkedList){
-//     Node* el = linkedList->start;
-//     if(el->next == NULL) return el->data;
-//     while(el->next){
-//         el=el->next;
-//     }
-//     int var = el->data;
-//     return var;
-// }
-
-// // get value of end item
-// int back(LinkedList* linkedList){
-//     Node* el = linkedList->start;
-//     return el->data;
-// }
-
-// // insert value at index, so current item at that index is pointed to by new item at index
-// void insert(LinkedList* linkedList, int index, int value){
-//     Node* el = linkedList->start;
-//     Node* current;
-//     Node* next;
-//     Node* newValue = new Node();
-//     newValue->data = value;
-//     int counter = 0;
-//     while(el){
-//         if(counter == index){
-//             current = el;
-//             next = el->next;
-//             current->next = newValue;
-//             newValue->next = next;
-//         }
-//         counter++;
-//         el = el->next;
-//     }
-
-// }
-
-// // removes node at given index
-// void erase(LinkedList* linkedList, int index){
-//     Node* el = linkedList->start;
-//     int counter = 0;
-//     if(index == 0){ pop_back(linkedList); return;}
-//     for(;el;counter++){
-//         if(counter == index-1){
-//             // remove el
-//             Node* current = el;
-//             Node* next = el->next;
-//             current->next = next->next;
-//             delete next;
-//         }
-//         el = el->next;
-//     }
-// }
 
 // // returns the value of the node at nth position from the end of the list
 // int value_n_from_end(LinkedList* linkedList, int n){

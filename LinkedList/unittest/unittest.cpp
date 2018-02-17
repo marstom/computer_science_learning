@@ -76,9 +76,48 @@ TEST(LinkedList, pop_back) {
     ASSERT_EQ(linked_list.pop_back(), 99);
     ASSERT_EQ(linked_list.get_size(),8);
     ASSERT_EQ("88, 77, 66, 55, 44, 33, 22, 11, ", linked_list.to_string_whole_list());
+}
+
+TEST(LinkedList, pop_front) { 
+    LinkedList<int> linked_list= test_list_four_int();
+    ASSERT_EQ("99, 88, 77, 66, 55, 44, 33, 22, 11, ", linked_list.to_string_whole_list());
+    ASSERT_EQ(linked_list.get_size(),9);
+    ASSERT_EQ(linked_list.pop_front(), 11);
+    ASSERT_EQ(linked_list.get_size(),8);
+    ASSERT_EQ("99, 88, 77, 66, 55, 44, 33, 22, ", linked_list.to_string_whole_list());
+}
+
+TEST(LinkedList, front) { 
+    LinkedList<int> linked_list= test_list_four_int();
+    ASSERT_EQ(linked_list.front(), 11);
+}
+
+TEST(LinkedList, back) { 
+    LinkedList<int> linked_list= test_list_four_int();
+    ASSERT_EQ(linked_list.back(), 99);
+}
+
+TEST(LinkedList, change_value_at) { 
 
 }
 
+TEST(LinkedList, erase) { 
+    LinkedList<int> linked_list= test_list_four_int();
+    ASSERT_EQ("99, 88, 77, 66, 55, 44, 33, 22, 11, ", linked_list.to_string_whole_list());
+    ASSERT_EQ(linked_list.get_size(),9);
+    linked_list.erase(2);
+    ASSERT_EQ(linked_list.get_size(),8);
+    ASSERT_EQ("99, 88, 66, 55, 44, 33, 22, 11, ", linked_list.to_string_whole_list());
+}
+
+TEST(LinkedList, insert) { 
+    LinkedList<int> linked_list= test_list_four_int();
+    ASSERT_EQ("99, 88, 77, 66, 55, 44, 33, 22, 11, ", linked_list.to_string_whole_list());
+    ASSERT_EQ(linked_list.get_size(),9);
+    linked_list.insert(3, 999);
+    ASSERT_EQ(linked_list.get_size(),10);
+    ASSERT_EQ("99, 88, 77, 66, 999, 55, 44, 33, 22, 11, ", linked_list.to_string_whole_list());
+}
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);

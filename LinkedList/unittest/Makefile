@@ -83,7 +83,6 @@ all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/tomek/dev/computer_science_learning/LinkedList/unittest/CMakeFiles /home/tomek/dev/computer_science_learning/LinkedList/unittest/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/tomek/dev/computer_science_learning/LinkedList/unittest/CMakeFiles 0
-	./runTests.out
 .PHONY : all
 
 # The main clean target

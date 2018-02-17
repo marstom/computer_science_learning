@@ -1,3 +1,0 @@
-/home/tomek/dev/computer_science_learning/LinkedList/unittest/CMakeFiles/edit_cache.dir
-/home/tomek/dev/computer_science_learning/LinkedList/unittest/CMakeFiles/rebuild_cache.dir
-/home/tomek/dev/computer_science_learning/LinkedList/unittest/CMakeFiles/runTests.out.dir

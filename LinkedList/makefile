@@ -1,5 +1,5 @@
 test:
-	g++ -g -Wall -Wextra tests.cpp
+	g++ -g -Wall -Wextra -Pedantic tests.cpp
 	./a.out
 
 speed:

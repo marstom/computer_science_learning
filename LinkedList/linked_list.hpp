@@ -202,6 +202,12 @@ void remove_value(LinkedList *linkedList, int value){
 }
 
 // print all elements
+// add to stringstream and compare with each appended element
+/*
+ *stringstream ss;
+ EXPECT_EQ(ss.str() "1 2 3 4 5") //chech if out has expected varlue
+ *
+ * */
 void print_whole_list(LinkedList* linkedList){
     Node* el = linkedList->start;
     if(el == NULL){

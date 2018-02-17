@@ -1,5 +1,5 @@
 test:
-	g++ -g -Wall -Wextra -Pedantic tests.cpp
+	g++ -std=gnu++11 -g -Wall -Wextra -pedantic tests.cpp
 	./a.out
 
 speed:

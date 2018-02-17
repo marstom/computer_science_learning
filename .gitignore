@@ -4,5 +4,9 @@
 *.swp
 *.log
 *.cmake
-*/CMakeFiles/
+**/CMakeFiles/
+**/.vscode/
+**/CMakeCache.txt
+**/cmake_install.cmake
+
 

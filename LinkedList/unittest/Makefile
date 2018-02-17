@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/tomek/dev/computer_science_learning/google_test
+CMAKE_SOURCE_DIR = /home/tomek/dev/computer_science_learning/LinkedList/unittest
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/tomek/dev/computer_science_learning/google_test
+CMAKE_BINARY_DIR = /home/tomek/dev/computer_science_learning/LinkedList/unittest
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,10 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tomek/dev/computer_science_learning/google_test/CMakeFiles /home/tomek/dev/computer_science_learning/google_test/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/tomek/dev/computer_science_learning/LinkedList/unittest/CMakeFiles /home/tomek/dev/computer_science_learning/LinkedList/unittest/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tomek/dev/computer_science_learning/google_test/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/tomek/dev/computer_science_learning/LinkedList/unittest/CMakeFiles 0
+	./runTests.out
 .PHONY : all
 
 # The main clean target
@@ -111,44 +112,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named runTests
+# Target rules for targets named runTests.out
 
 # Build rule for target.
-runTests: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 runTests
-.PHONY : runTests
+runTests.out: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 runTests.out
+.PHONY : runTests.out
 
 # fast build rule for target.
-runTests/fast:
-	$(MAKE) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/build
-.PHONY : runTests/fast
+runTests.out/fast:
+	$(MAKE) -f CMakeFiles/runTests.out.dir/build.make CMakeFiles/runTests.out.dir/build
+.PHONY : runTests.out/fast
 
-google_test_example.o: google_test_example.cpp.o
+unittest.o: unittest.cpp.o
 
-.PHONY : google_test_example.o
+.PHONY : unittest.o
 
 # target to build an object file
-google_test_example.cpp.o:
-	$(MAKE) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/google_test_example.cpp.o
-.PHONY : google_test_example.cpp.o
+unittest.cpp.o:
+	$(MAKE) -f CMakeFiles/runTests.out.dir/build.make CMakeFiles/runTests.out.dir/unittest.cpp.o
+.PHONY : unittest.cpp.o
 
-google_test_example.i: google_test_example.cpp.i
+unittest.i: unittest.cpp.i
 
-.PHONY : google_test_example.i
+.PHONY : unittest.i
 
 # target to preprocess a source file
-google_test_example.cpp.i:
-	$(MAKE) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/google_test_example.cpp.i
-.PHONY : google_test_example.cpp.i
+unittest.cpp.i:
+	$(MAKE) -f CMakeFiles/runTests.out.dir/build.make CMakeFiles/runTests.out.dir/unittest.cpp.i
+.PHONY : unittest.cpp.i
 
-google_test_example.s: google_test_example.cpp.s
+unittest.s: unittest.cpp.s
 
-.PHONY : google_test_example.s
+.PHONY : unittest.s
 
 # target to generate assembly for a file
-google_test_example.cpp.s:
-	$(MAKE) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/google_test_example.cpp.s
-.PHONY : google_test_example.cpp.s
+unittest.cpp.s:
+	$(MAKE) -f CMakeFiles/runTests.out.dir/build.make CMakeFiles/runTests.out.dir/unittest.cpp.s
+.PHONY : unittest.cpp.s
 
 # Help Target
 help:
@@ -158,10 +159,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... runTests"
-	@echo "... google_test_example.o"
-	@echo "... google_test_example.i"
-	@echo "... google_test_example.s"
+	@echo "... runTests.out"
+	@echo "... unittest.o"
+	@echo "... unittest.i"
+	@echo "... unittest.s"
 .PHONY : help
 
 

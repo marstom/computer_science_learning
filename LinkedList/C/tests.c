@@ -1,33 +1,11 @@
-#include <iostream>
-#include <string>
-#include <cassert>
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
 
-#include "linked_list.hpp"
-using namespace std;
-using namespace container::linked_list;
+#include "linked_list.h"
 
-
-void test_push_back(){
-
-    LinkedList<int> linked_list;
-    linked_list.push_back(23);
-    linked_list.push_back(123);
-    linked_list.push_back(433);
-    // cout << linked_list.get_size() << endl;
-    linked_list.print_whole_list();
-
-
-}
-
-int main(){
-    test_push_back();
-
-
-    return 0;
-}
-/*
 void test_add(){
-    LinkedList* aa = new LinkedList();
+    struct LinkedList* aa = malloc(sizeof(struct LinkedList*));
     push_back(aa, 3);
     push_back(aa, 12);
     push_back(aa, 24);
@@ -37,17 +15,16 @@ void test_add(){
 }
 
 void test_size(){
-    LinkedList* aa = new LinkedList();
+    struct LinkedList* aa = malloc(sizeof(struct LinkedList*));
     push_back(aa, 3);
     push_back(aa, 12);
     push_back(aa, 24);
     push_back(aa, 1);
-    cout << size(aa) << endl;
-    assert (size(aa) == 4);
+    // assert (size(aa) == 4);
 }
 
 void test_remove_value(){
-    LinkedList* aa = new LinkedList();
+    struct LinkedList* aa = malloc(sizeof(struct LinkedList*));
     push_back(aa, 1);
     push_back(aa, 2);
     push_back(aa, 3);
@@ -58,7 +35,7 @@ void test_remove_value(){
 }
 
 void test_remove_value_first(){
-    LinkedList* aa = new LinkedList();
+    struct LinkedList* aa = malloc(sizeof(struct LinkedList*));
     push_back(aa, 1);
     push_back(aa, 2);
     push_back(aa, 3);
@@ -69,19 +46,18 @@ void test_remove_value_first(){
 }
 
 void test_empty(){
-    LinkedList* aa = new LinkedList();
+    struct LinkedList* aa = malloc(sizeof(struct LinkedList*));
     push_back(aa, 1);
     push_back(aa, 2);
     push_back(aa, 3);
     assert(empty(aa) == false);
     
-    LinkedList* bb = new LinkedList();
+    struct LinkedList* bb = malloc(sizeof(struct LinkedList*));
     assert(empty(bb) == true);
-    cout << "passed\n";
 }
 
 void test_value_at(){
-    LinkedList* aa = new LinkedList();
+    struct LinkedList* aa = malloc(sizeof(struct LinkedList*));
     push_back(aa, 1);
     push_back(aa, 2);
     push_back(aa, 3);
@@ -91,11 +67,10 @@ void test_value_at(){
     assert(value_at(aa, 0) == 5);
     assert(value_at(aa, 4) == 1);
     // value_at(aa, 44);
-    cout << "passed\n";
 }
 
 void test_pop_back(){
-    LinkedList* aa = new LinkedList();
+    struct LinkedList* aa = malloc(sizeof(struct LinkedList*));
     push_back(aa, 1);
     push_back(aa, 2);
     push_back(aa, 3);
@@ -105,23 +80,21 @@ void test_pop_back(){
     assert (pop_back(aa)==4);
     assert (pop_back(aa)==3);
     print_whole_list(aa);
-    cout << "passed\n";
 
 }
 
 void test_back(){
-    LinkedList* aa = new LinkedList();
+    struct LinkedList* aa = malloc(sizeof(struct LinkedList*));
     push_back(aa, 1);
     push_back(aa, 2);
     push_back(aa, 3);
     assert (back(aa)==3);
     assert (back(aa)==3);
     print_whole_list(aa);
-    cout << "passed\n";
 }
 
 void test_push_front(){
-    LinkedList* aa = new LinkedList();
+    struct LinkedList* aa = malloc(sizeof(struct LinkedList*));
     push_back(aa, 1);
     push_back(aa, 2);
     push_back(aa, 3);
@@ -130,13 +103,13 @@ void test_push_front(){
 }
 
 void test_push_front_empty(){
-    LinkedList* aa = new LinkedList();
+    struct LinkedList* aa = malloc(sizeof(struct LinkedList*));
     push_front(aa, 12);
     print_whole_list(aa);
 }
 
 void test_pop_front(){
-    LinkedList* aa = new LinkedList();
+    struct LinkedList* aa = malloc(sizeof(struct LinkedList*));
     push_back(aa, 1);
     push_back(aa, 2);
     push_back(aa, 3);
@@ -148,33 +121,29 @@ void test_pop_front(){
 }
 
 void test_front(){
-    LinkedList* aa = new LinkedList();
+    struct LinkedList* aa = malloc(sizeof(struct LinkedList*));
     push_back(aa, 1);
     push_back(aa, 2);
     push_back(aa, 3);
-    cout << "First value " << front(aa) << endl;
     assert (front(aa) == 1);
 }
 
 void test_value_n_from_end(){
-    LinkedList* aa = new LinkedList();
+    struct LinkedList* aa = malloc(sizeof(struct LinkedList*));
     push_back(aa, 1);
     push_back(aa, 2);
     push_back(aa, 3);
     push_back(aa, 5);
     push_back(aa, 6);
     push_back(aa, 7);
-    cout << "start element =" << aa->start->data << endl;
     print_whole_list(aa);
     assert (value_n_from_end(aa, 0) == 1);
     assert (value_n_from_end(aa, 2) == 3);
     assert (value_n_from_end(aa, 5) == 7);
-    cout << "passed\n";
-
 }
 
 void test_reverse(){
-    LinkedList* aa = new LinkedList();
+    struct LinkedList* aa = malloc(sizeof(struct LinkedList*));
     push_back(aa, 1);
     push_back(aa, 2);
     push_back(aa, 3);
@@ -189,26 +158,25 @@ void test_reverse(){
 }
 
 void test_erase(){
-    LinkedList* aa = new LinkedList();
+    struct LinkedList* aa = malloc(sizeof(struct LinkedList*));
     push_back(aa, 1);
     push_back(aa, 2);
     push_back(aa, 3);
     push_back(aa, 4);
     push_back(aa, 5);
     erase(aa, 4);
-    cout << "test erase \n";
     print_whole_list(aa);
 
 }
 
 void test_insert(){
-    LinkedList* aa = new LinkedList();
+    struct LinkedList* aa = malloc(sizeof(struct LinkedList*));
     push_back(aa, 1);
     push_back(aa, 2);
     push_back(aa, 3);
     push_back(aa, 4);
     insert(aa, 1, 99);
-    cout << "insert value"<< size(aa) << endl;
+    printf("%d\n",size(aa));
     print_whole_list(aa);
 }
 
@@ -231,4 +199,3 @@ int main(){
     test_push_front_empty();
     return 0;
 }
-*/

@@ -5,29 +5,50 @@
 typedef struct Node{
     int data;
     struct Node* next;
-};
+}node_t;
 
 typedef struct LinkedList{
     struct Node* start;
-};
+    // size_t size; //how to make a counter which starts 0????
+}linked_list_t;
 
-struct Node* begin_linked_list(struct LinkedList *linkedList){
-    struct Node *el = linkedList->start;
-    el = malloc(sizeof(struct Node));
-    el->data = NULL;
-    return el;
+
+
+// adds an item at the end
+void push_back(linked_list_t* linkedList, int value){
+    node_t* el = malloc(sizeof(node_t*));
+    el->data = value;
+    el->next = linkedList->start;
+    linkedList->start = el;
 }
 
 //returns number of data elements in list
-size_t size(struct LinkedList *linkedList){
-    struct Node* el = begin_linked_list(linkedList);
+size_t size(linked_list_t* linkedList){
+    node_t* el = linkedList->start;
     size_t size = 0;
-    while(el){
+    while(el != NULL){
         size++;
         el = el->next;
     }
     return size;
 }
+
+bool empty(struct LinkedList* linkedList){
+    if(linkedList->start == NULL)
+        return true;
+    return false;
+}
+
+void print_list(linked_list_t* linked_list){
+    node_t *el = linked_list->start;
+    while(el != NULL){
+        printf("%d\n", el->data);
+        el = el->next;
+    }
+}
+
+
+/*
 
 //  bool returns true if empty
 bool empty(struct LinkedList* linkedList){
@@ -50,14 +71,6 @@ int value_at(struct LinkedList *linkedList, size_t index){
             return el->data;
     } 
     //throw std::runtime_error("List out of range.");
-}
-
-// adds an item at the end
-void push_back(struct LinkedList *linkedList, int value){
-    struct Node* el = malloc(sizeof(struct Node*));
-    el->data = value;
-    el->next = linkedList->start;
-    linkedList->start = el;
 }
 
 // adds an item to the front of the list
@@ -216,3 +229,4 @@ void print_whole_list(struct LinkedList* linkedList){
         el=el->next;
     }
 }
+*/

@@ -47,31 +47,31 @@ void print_list(linked_list_t* linked_list){
     }
 }
 
-
-/*
-
-//  bool returns true if empty
-bool empty(struct LinkedList* linkedList){
-    if(linkedList->start == NULL)
-        return true;
-    return false;
-}
-
 // returns the value of the nth item (starting at 0 for first)
-int value_at(struct LinkedList *linkedList, size_t index){
-    // if(empty(linkedList)) throw std::runtime_error("list is empty"); //except
-    // if(size(linkedList) < index) throw std::runtime_error("out of list index"); //except
-    struct Node* el = begin_linked_list(linkedList);
-    if(index == 0) return el->data;
+int value_at(linked_list_t* linked_list, size_t index){
+    if(empty(linked_list)){
+        printf("Error list is empty");
+        return -1;
+    }
+    if(size(linked_list) < index){
+        printf("Error out of index");
+        return -1;
+    }
+
+    node_t* el = linked_list->start;
+    if(index == 0) 
+        return el->data;
     size_t count = 0;
-    while(el){
+    while(el!=NULL){
         el = el->next;
         count++;
         if(count == index)
             return el->data;
     } 
-    //throw std::runtime_error("List out of range.");
+    return -1;
 }
+
+/*
 
 // adds an item to the front of the list
 void push_front(struct LinkedList *linkedList, int value){

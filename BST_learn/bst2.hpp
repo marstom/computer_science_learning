@@ -1,7 +1,7 @@
 /*
  *
  * BST Implement
- * asd
+ * 
  *
  */
 // #include <iostream>

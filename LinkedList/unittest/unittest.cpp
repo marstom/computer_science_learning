@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <stdexcept>
 #include <gtest/gtest.h>
 #include "../linked_list.hpp"
 
@@ -98,6 +99,11 @@ TEST(LinkedList, back) {
 }
 
 TEST(LinkedList, change_value_at) { 
+    LinkedList<int> linked_list= test_list_four_int();
+    ASSERT_EQ("99, 88, 77, 66, 55, 44, 33, 22, 11, ", linked_list.to_string_whole_list());
+    linked_list.change_value_at(2, 12345);
+    linked_list.change_value_at(8, 9999);
+    ASSERT_EQ("99, 88, 12345, 66, 55, 44, 33, 22, 9999, ", linked_list.to_string_whole_list());
 
 }
 
@@ -117,6 +123,41 @@ TEST(LinkedList, insert) {
     linked_list.insert(3, 999);
     ASSERT_EQ(linked_list.get_size(),10);
     ASSERT_EQ("99, 88, 77, 66, 999, 55, 44, 33, 22, 11, ", linked_list.to_string_whole_list());
+}
+
+TEST(LinkedList, value_n_from_end) { 
+    LinkedList<int> linked_list= test_list_four_int();
+    ASSERT_EQ(linked_list.value_n_from_end(4), 55);
+    LinkedList<int> aa;
+    aa.push_back(12);
+    try{
+    //EXPECT_THROW(aa.value_n_from_end(0), std::range_error("Out of range"));
+    aa.value_n_from_end(4);
+    FAIL() << "Expected std::out_of_range";
+    } catch(std::out_of_range & err){
+        EXPECT_EQ(err.what(),std::string("Out of range"));
+    }catch(...) {
+        FAIL() << "Expected std::out_of_range";
+    }
+}
+
+TEST(LinkedList, reverse) { 
+    LinkedList<int> linked_list;
+    linked_list.push_back(1);
+    linked_list.push_back(2);
+    linked_list.push_back(3);
+    linked_list.reverse();
+    ASSERT_EQ("1, 2, 3, ", linked_list.to_string_whole_list());
+}
+
+TEST(LinkedList, remove_value) { 
+    LinkedList<int> linked_list= test_list_four_int();
+    ASSERT_EQ("99, 88, 77, 66, 55, 44, 33, 22, 11, ", linked_list.to_string_whole_list());
+    linked_list.remove_value(22);
+    linked_list.remove_value(112);
+    linked_list.remove_value(-5540);
+    ASSERT_EQ("99, 88, 77, 66, 55, 44, 33, 11, ", linked_list.to_string_whole_list());
+
 }
 
 int main(int argc, char **argv) {

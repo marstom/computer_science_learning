@@ -136,7 +136,17 @@ public:
         return head->data;
     }
 
-    void change_value_at(size_t index){}
+    void change_value_at(size_t index, T value){
+        Node<T>* el = head;
+        if(index > get_size())
+            throw std::out_of_range("Out of range");
+        for(int counter = 0; el != nullptr; counter++){
+            if(counter== index){
+                el->data = value;
+            }
+            el = el->next;
+        }
+    }
 
     // removes node at given index
     void erase(size_t index){
@@ -145,6 +155,9 @@ public:
             pop_back();
             return;
         }
+
+        if(index > get_size())
+            throw std::out_of_range("Out of range");
 
         for(int counter = 0; el != nullptr; counter++){
             if(counter == index-1){
@@ -179,61 +192,56 @@ public:
         size++;
     }
 
+    // returns the value of the node at nth position from the end of the list
+    T value_n_from_end(int n){
+        n = get_size() - n - 1;
+        if(n<0) throw std::out_of_range("Out of range");
+        Node<T> *el = head;
+        for(int counter = 0;el != nullptr && (counter != n); counter++){
+            el = el->next;
+        }
+        return el->data;
+    }
+
+    // reverses the list
+    void reverse(){
+        Node<T>* el = head;
+        Node<T>* prev = nullptr;
+        Node<T>* current = el;
+        Node<T>* next = el->next;
+        while(current != nullptr){
+            next= current->next;
+            current->next = prev;
+            prev = current;
+            current = next;
+        }
+        head = prev;
+    }
+
+    // removes the first item in the list with this value
+    void remove_value(T value){
+        Node<T>* el = head;
+        if(el->data == value){
+            Node<T> *tmp = head;
+            head = tmp->next;
+            delete(tmp);
+        }
+
+        while(el != nullptr){
+            if(el->next && el->next->data == value){
+                Node<T>* current = el;
+                Node<T>* next = el->next;
+                current->next = next->next;
+                delete(next);
+            }
+            el=el->next;
+        }
+    }
+
 private:
     Node<T> *head = nullptr;
     size_t size = 0;
 };
-
-
-
-// // returns the value of the node at nth position from the end of the list
-// int value_n_from_end(LinkedList* linkedList, int n){
-//     int nn = size(linkedList) - n - 1;
-//     Node *el = linkedList->start;
-//     int counter = 0;
-    
-//     for(;el && (counter != nn); counter++){
-//         el = el->next;
-//     }
-    
-//     return el->data;
-// }
-
-// // reverses the list
-// void reverse(LinkedList* linkedList){
-//     Node* el = linkedList->start;
-//     Node* prev = NULL;
-//     Node* current = el;
-//     Node* next = el->next;
-//     while(current){
-//         next= current->next;
-//         current->next = prev;
-//         prev = current;
-//         current = next;
-//     }
-//     linkedList->start = prev;
-// }
-
-// // removes the first item in the list with this value
-// void remove_value(LinkedList *linkedList, int value){
-//     Node* el = linkedList->start;
-//     if(el->data == value){
-//         Node *tmp = linkedList->start;
-//         linkedList->start = tmp->next;
-//         delete(tmp);
-        
-//     }
-//     while(el){
-//         if(el->next && el->next->data == value){
-//             Node* current = el;
-//             Node* next = el->next;
-//             current->next = next->next;
-//             delete(next);
-//         }
-//         el=el->next;
-//     }
-// }
-
 
 
 

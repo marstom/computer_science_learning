@@ -1,11 +1,28 @@
-Readme
+# Tomasz Marszalek's Coding Interview University #
+#### About:
+- This repo is a based on [Jwasham's Coding Interview University](https://github.com/jwasham/coding-interview-university)
+- I implement everything in C, C++
 
-Example google-test usage:
+##### Content:
+* Linked lists
 
-$ export GTEST_HOME=~/usr/gtest
-    $ export LD_LIBRARY_PATH=$GTEST_HOME/lib:$LD_LIBRARY_PATH
-    $ g++ -I $GTEST_HOME/include -L $GTEST_HOME/lib -lgtest -lgtest_main -lpthread test.cpp
+# How to use it
+#### How to run tests?
+1. First install google-test (I do it so on my Linux Mint):
+```bash
+sudo apt-get install libgtest-dev
+sudo apt-get install cmake # install cmake
+cd /usr/src/gtest
+sudo cmake CMakeLists.txt
+sudo make
+sudo cp *.a /usr/lib
+```
 
+2. How to run unittests?
+* In unittest folder:
+```bash
+cmake CMakeLists.txt
+make
+./runTests.out # run all unittests
+```
 
-
-inline -  

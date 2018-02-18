@@ -33,11 +33,11 @@ void genNumber(){
 }
 
 void test_speed(){
-    LinkedList* linkedList = new LinkedList();
+    LinkedList<int> linked_List;
 
     high_resolution_clock::time_point t1 = high_resolution_clock::now();
     for(int i=0; i<BIG; i++){
-        push_back(linkedList ,randoms[i]);
+        linked_List.push_back(randoms[i]);
     }
 
     high_resolution_clock::time_point t2 = high_resolution_clock::now();

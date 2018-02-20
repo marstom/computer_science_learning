@@ -25,37 +25,18 @@ class Tree{
 public:
      // insert value into tree
     void insert(T value){
-
+        count++;
         if(root == nullptr){
             root = new BstNode<T>(value);
             return;
         }
-
-        BstNode<T>* insert_iterator = root;
-        BstNode<T>* parent = nullptr;
-
-        while(insert_iterator){
-            parent = insert_iterator;
-            // insert_iterator = value < insert_iterator->data
-            // ? insert_iterator->smaller
-            // : insert_iterator->greater;
-
-            if(value < insert_iterator->data){
-                insert_iterator =  insert_iterator->smaller;
-            }else{
-                insert_iterator =  insert_iterator->greater;
-            }
-        }
-
-        if(value < parent->data)
-        parent->smaller = new BstNode<T>(value);
-        else
-        parent->greater = new BstNode<T>(value);
-
+        insert(root, value);
     }
 
     // get count of values stored
-    size_t get_node_count();
+    size_t get_node_count(){
+        return count;
+    }
     
     // prints the values in the tree, from min to max
     void print_values(){
@@ -65,7 +46,9 @@ public:
     void delete_tree();
 
     // returns true if given value exists in the tree
-    bool is_in_tree(T value);
+    bool is_in_tree(T value){
+        return is_in_tree(root, value); // TODO fix it
+    }
 
     // returns the height in nodes (single node's height is 1)
     size_t get_height();
@@ -85,8 +68,17 @@ public:
     
 private:
 
-    void insert(Node<T> *node, T val){
-        
+    BstNode<T>* insert(BstNode<T> *node, T value){
+        if(node == nullptr){
+            node = new BstNode<T>(value);
+            return node;
+        }
+        if(value < node->data){
+            node->smaller = insert(node->smaller, value);
+        }else{
+            node->greater = insert(node->greater, value);
+        }
+        return node;
     }
 
     void print_values(BstNode<T>* node){
@@ -95,8 +87,17 @@ private:
         cout << node->data << endl;
         print_values(node->greater);
     }
+    
+    bool is_in_tree(BstNode<T>* node, T value){
+        if(node == nullptr) return false;
+        if(node->data == value) return true;
+        is_in_tree(node->greater, value);
+        is_in_tree(node->smaller, value);
+        return false;
+    }
 
     BstNode<T>* root = nullptr;
+    size_t count = 0;
 
 };
 

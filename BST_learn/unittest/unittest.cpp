@@ -18,6 +18,8 @@ TEST(BST, insert) {
     tree.insert(4);
     tree.insert(2);
     tree.print_values();
+    cout << "Node count " << tree.get_node_count() << endl;
+    cout << "is in tree " << tree.is_in_tree(14) << endl;
     cout << "test finisher\n";
 }
  

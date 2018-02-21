@@ -43,7 +43,13 @@ public:
         print_values(this->root);
     }
 
-    void delete_tree();
+    std::string to_string(){
+        return to_string(root);
+    }
+
+    void delete_tree(){
+        delete_tree(root);
+    }
 
     // returns true if given value exists in the tree
     bool is_in_tree(T value){
@@ -51,15 +57,23 @@ public:
     }
 
     // returns the height in nodes (single node's height is 1)
-    size_t get_height();
+    size_t get_height(){
+        return get_height(root);
+    }
 
     // returns the minimum value stored in the tree
-    T get_min(); 
+    T get_min(){
+        return get_min(root);
+    }
 
     // returns the maximum value stored in the tree
-    T get_max();
+    T get_max(){
+        return get_max(root);
+    }
 
-    bool is_binary_search_tree();
+    bool is_binary_search_tree(){
+        return is_binary_search_tree(root);
+    }
 
     void delete_value(T value);
 
@@ -88,6 +102,23 @@ private:
         print_values(node->greater);
     }
     
+    std::string to_string(BstNode<T>* node){
+        if(node == nullptr) 
+            return "";
+        to_string(node->smaller);
+        ss << node->data << ", ";
+        to_string(node->greater);
+        return ss.str();
+    }
+
+    void delete_tree(BstNode<T>* node){
+        if(node == nullptr) return;
+        delete_tree(node->greater);
+        delete_tree(node->smaller);
+        delete node;
+        return;
+    }
+
     bool is_in_tree(BstNode<T>* node, T value){
         if(node == nullptr) return false;
         if(node->data == value) return true;
@@ -96,8 +127,48 @@ private:
         return false;
     }
 
+    T get_min(BstNode<T>* node){
+        while(node->smaller != nullptr){
+            node = node->smaller;
+        }
+        return node->data;
+    }
+
+    // returns the maximum value stored in the tree
+    T get_max(BstNode<T>* node){
+        while(node->greater != nullptr){
+            node = node->greater;
+        }
+        return node->data;       
+    }
+    size_t get_height(BstNode<T>* node){
+        if(node == nullptr) return 0;    
+        size_t c_smaller = get_height(node->smaller);
+        size_t c_greater = get_height(node->greater);
+
+        if(c_smaller > c_greater){
+            return c_smaller + 1;
+        }else{
+            return c_greater + 1;
+        }
+    }
+
+
+    bool is_binary_search_tree(BstNode<T>* node){
+        if(node == nullptr) return true;
+        if(node->smaller != nullptr && get_max(node->smaller) > node->data)
+           return false;
+        if(node->greater != nullptr && get_min(node->greater) < node->data)
+           return false;
+        if(!is_binary_search_tree(node->smaller) || !is_binary_search_tree(node->greater))
+           return false;
+        
+        return true;
+    }
+
     BstNode<T>* root = nullptr;
     size_t count = 0;
+    std::stringstream ss;
 
 };
 

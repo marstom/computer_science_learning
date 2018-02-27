@@ -90,6 +90,19 @@ TEST(BST, is_binary_search_tree) {
     ASSERT_TRUE(tree.is_binary_search_tree());
 }
 
+TEST(BST, delete_value){
+    Tree<int> tree;
+    fill_example_tree(tree);
+    tree.delete_value(2);
+    ASSERT_EQ("1, 3, 4, 5, 11, 22, 33, 44, 55, 777, 1024, ", tree.to_string());
+    tree.delete_value(44);
+    ASSERT_EQ("1, 3, 4, 5, 11, 22, 33, 55, 777, 1024, ", tree.to_string());
+    tree.delete_value(1024);
+    ASSERT_EQ("1, 3, 4, 5, 11, 22, 33, 55, 777, ", tree.to_string());
+    tree.delete_value(1);
+    ASSERT_EQ("3, 4, 5, 11, 22, 33, 55, 777, ", tree.to_string());
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

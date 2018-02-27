@@ -44,11 +44,12 @@ public:
     }
 
     std::string to_string(){
+        ss.str("");
         return to_string(root);
     }
 
     void delete_tree(){
-        delete_tree(root);
+        root = delete_tree(root);
     }
 
     // returns true if given value exists in the tree
@@ -75,7 +76,12 @@ public:
         return is_binary_search_tree(root);
     }
 
-    void delete_value(T value);
+    void delete_value(T value){
+        //if(is_in_tree(root, value)){
+        //    count--;
+            delete_value(root, value);
+       // }
+    }
 
     // returns next-highest value in tree after given value, -1 if none
     T get_successor();
@@ -108,7 +114,8 @@ private:
         to_string(node->smaller);
         ss << node->data << ", ";
         to_string(node->greater);
-        return ss.str();
+        string str = ss.str();
+        return str;
     }
 
     void delete_tree(BstNode<T>* node){
@@ -134,6 +141,14 @@ private:
         return node->data;
     }
 
+    //TODO fix it
+    BstNode<T>* get_min_ptr(BstNode<T>* node){
+        while(node->smaller != nullptr){
+            node = node->smaller;
+        }
+        return node;
+    }
+
     // returns the maximum value stored in the tree
     T get_max(BstNode<T>* node){
         while(node->greater != nullptr){
@@ -151,6 +166,34 @@ private:
         }else{
             return c_greater + 1;
         }
+    }
+
+    // TODO fix it
+    BstNode<T>* delete_value(BstNode<T>* node, T value){
+        if(node == nullptr) return node;
+        if(value < node->data){
+            node->smaller = delete_value(node->smaller, value);
+        }
+        else if(value > node->data){
+            node->greater = delete_value(node->greater, value);
+        }
+        else{
+            if(node->smaller == nullptr){
+                BstNode<T>* temp = node->greater;
+                delete node;
+                return temp;
+            }
+            else if(node->greater == nullptr){
+                BstNode<T>* temp = node->smaller;
+                delete node;
+                return temp;
+            }
+
+            BstNode<T>* temp = get_min_ptr(node->greater);
+            node->data = temp->data;
+            node->greater = delete_value(node->greater, temp->data);
+        }
+        return node;
     }
 
 

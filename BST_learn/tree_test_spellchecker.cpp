@@ -13,7 +13,7 @@
  *
  */
 
-#include "bst.hpp"
+#include "bst_first_version.hpp"
 
 using namespace std;
 

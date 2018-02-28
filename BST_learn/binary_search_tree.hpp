@@ -13,7 +13,7 @@ namespace container{
 template<typename T>
 struct BstNode{
 
-    BstNode(T d): data(d), smaller(nullptr), greater(nullptr){}
+    BstNode(T d): data(d){}
 
     T data;
     BstNode* smaller = nullptr;
@@ -49,7 +49,7 @@ public:
     }
 
     void delete_tree(){
-        root = delete_tree(root);
+        delete_tree(root);
     }
 
     // returns true if given value exists in the tree
@@ -77,14 +77,16 @@ public:
     }
 
     void delete_value(T value){
-        //if(is_in_tree(root, value)){
-        //    count--;
+        if(is_in_tree(root, value)){
+           count--;
             delete_value(root, value);
-       // }
+        }
     }
 
     // returns next-highest value in tree after given value, -1 if none
-    T get_successor();
+    T get_successor(T value){
+        return get_successor(root, value);
+    }
     
 private:
 
@@ -121,17 +123,20 @@ private:
     void delete_tree(BstNode<T>* node){
         if(node == nullptr) return;
         delete_tree(node->greater);
+        delete node;  //segmentation fault
         delete_tree(node->smaller);
-        delete node;
+        
         return;
     }
 
     bool is_in_tree(BstNode<T>* node, T value){
-        if(node == nullptr) return false;
-        if(node->data == value) return true;
-        is_in_tree(node->greater, value);
-        is_in_tree(node->smaller, value);
-        return false;
+        if(node == nullptr){
+            return false;
+        }
+        if(node->data == value){ 
+            return true;
+        }
+        return is_in_tree(node->smaller, value) | is_in_tree(node->greater, value);
     }
 
     T get_min(BstNode<T>* node){
@@ -141,7 +146,6 @@ private:
         return node->data;
     }
 
-    //TODO fix it
     BstNode<T>* get_min_ptr(BstNode<T>* node){
         while(node->smaller != nullptr){
             node = node->smaller;
@@ -168,7 +172,6 @@ private:
         }
     }
 
-    // TODO fix it
     BstNode<T>* delete_value(BstNode<T>* node, T value){
         if(node == nullptr) return node;
         if(value < node->data){
@@ -196,6 +199,10 @@ private:
         return node;
     }
 
+    // T get_successor(BstNode<T>* node, T value){
+    //     return -1;
+        
+    // }
 
     bool is_binary_search_tree(BstNode<T>* node){
         if(node == nullptr) return true;

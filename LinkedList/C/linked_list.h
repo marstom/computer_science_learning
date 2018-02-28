@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+//TODO
+
 typedef struct Node{
     int data;
     struct Node* next;

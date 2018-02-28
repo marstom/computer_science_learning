@@ -51,6 +51,20 @@ TEST(BST, get_node_count) {
     ASSERT_EQ(12, tree.get_node_count());
 }
 
+
+TEST(BST, is_in_tree) { 
+    Tree<int> tree;
+    fill_example_tree(tree);
+    //cout << tree.to_string() << endl;
+    ASSERT_TRUE(tree.is_in_tree(1));
+    ASSERT_TRUE(tree.is_in_tree(2));
+    ASSERT_TRUE(tree.is_in_tree(3));
+    ASSERT_TRUE(tree.is_in_tree(22));
+    ASSERT_TRUE(tree.is_in_tree(11));
+    ASSERT_TRUE(tree.is_in_tree(1024));
+    ASSERT_FALSE(tree.is_in_tree(7));
+}
+
 TEST(BST, delete_tree) { 
     Tree<int> tree;
     fill_example_tree(tree);
@@ -59,6 +73,12 @@ TEST(BST, delete_tree) {
     string str =tree.to_string();
     ASSERT_EQ("", str);
     cout << str << endl;
+}
+
+TEST(BST, get_height) { 
+    Tree<int> tree;
+    fill_example_tree(tree);
+    ASSERT_EQ(7, tree.get_height());
 }
 
 TEST(BST, get_min) { 
@@ -70,6 +90,7 @@ TEST(BST, get_min) {
     cout << str << endl;
 }
 
+
 TEST(BST, get_max) { 
     Tree<int> tree;
     fill_example_tree(tree);
@@ -78,11 +99,13 @@ TEST(BST, get_max) {
     cout << str << endl;
 }
 
-TEST(BST, get_height) { 
-    Tree<int> tree;
-    fill_example_tree(tree);
-    ASSERT_EQ(7, tree.get_height());
-}
+
+// TEST(BST, get_successor) { 
+//     Tree<int> tree;
+//     fill_example_tree(tree);
+//     int s = tree.get_successor(22);
+//     ASSERT_EQ(33, s);
+// }
 
 TEST(BST, is_binary_search_tree) { 
     Tree<int> tree;

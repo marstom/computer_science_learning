@@ -1,10 +1,10 @@
 array_queue:
-	g++ array_queue.cpp -g -Wall -Wextra -std=c++11
+	g++ main_array_queue.cpp -g -Wall -Wextra -std=c++11
 	./a.out
 list_queue:
-	g++ list_queue.cpp -g -Wall -Wextra -std=c++11
+	g++ main_list_queue.cpp -g -Wall -Wextra -std=c++11
 	./a.out
 
 clean:
-	rm a.out
+	rm *.out
 

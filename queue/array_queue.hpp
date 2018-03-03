@@ -2,6 +2,7 @@
 #include <sstream>
 #include <stdexcept>
 
+namespace container{
 template<typename T>
 class ArrayQueue{
 public:
@@ -19,6 +20,7 @@ public:
             inc_tail();
         }else{
             std::cerr << "Queue is full !!!\n";
+            throw std::length_error("Queue is full!");
         }
     }
 
@@ -29,9 +31,7 @@ public:
             return el;
         }
         else{
-            //throw std::runtime_error("Queue is empty.");
-            std::cerr << "Queue is empty\n";
-            return -1;
+            throw std::length_error("Queue is empty.");
         }
             
     }
@@ -44,6 +44,10 @@ public:
         if(queue_length >= size)
             return true;
         return false;
+    }
+
+    size_t length(){
+        return queue_length;
     }
 
 private:
@@ -71,40 +75,4 @@ private:
 
 };
 
-int main(){
-    ArrayQueue<int> arr_queue(6);
-    arr_queue.enqueue(1);
-    arr_queue.enqueue(2);
-    arr_queue.enqueue(3);
-    arr_queue.enqueue(4);
-
-    std::cout << "Pint queue \n";
-    for(int i = 0; i<4; i++){
-        std::cout<<arr_queue.dequeue()<<std::endl;
-    }
-
-    arr_queue.enqueue(1);
-    arr_queue.enqueue(2);
-    arr_queue.enqueue(3);
-    arr_queue.enqueue(4);
-
-    std::cout << "Pint queue \n";
-    for(int i = 0; i<4; i++){
-        std::cout<<arr_queue.dequeue()<<std::endl;
-    }
-
-
-    arr_queue.enqueue(1);
-    arr_queue.enqueue(2);
-    arr_queue.enqueue(3);
-    arr_queue.enqueue(4);
-    arr_queue.enqueue(5);
-    arr_queue.enqueue(6);
-
-    std::cout << "Pint queue \n";
-    for(int i = 0; i<4; i++){
-        std::cout<<arr_queue.dequeue()<<std::endl;
-    }
-
-    return 0;
 }

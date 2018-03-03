@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include <string>
 
-using namespace std;
+namespace container{
 
 template<typename T>
 struct Node{
@@ -41,7 +41,7 @@ public:
             return _dequeue();
         }
         else{
-            throw std::range_error("List is out of range!");
+            throw std::range_error("Queue is empty!");
         }
     }
 
@@ -76,28 +76,4 @@ private:
     size_t queue_len;
 };
 
-
-int main(){
-    cout << "Linked list queue: " << endl;
-
-    ListQueue<string> list_queue;
-    list_queue.enqueue("tome");
-    list_queue.enqueue("Marek");
-    list_queue.enqueue("Andrew");
-    list_queue.enqueue("Janek");
-    cout << "List begin:" << endl;
-    for(int i=0; i<4; i++){
-        cout << list_queue.dequeue() << endl;
-    }
-
-
-    list_queue.enqueue("Ariel");
-    list_queue.enqueue("Kmil");
-    list_queue.enqueue("Andrzej");
-    list_queue.enqueue("Jaro");
-    cout << "List begin:" << endl;
-    for(int i=0; i<4; i++){
-        cout << list_queue.dequeue() << endl;
-    }
-    return 0;
 }

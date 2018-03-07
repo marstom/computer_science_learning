@@ -38,7 +38,11 @@ public:
 
     T dequeue(){
         if(!out_of_range()){
-            return _dequeue();
+            queue_len--;
+            T val = head->data;
+            temp = head->next;
+            head = temp;
+            return val;
         }
         else{
             throw std::range_error("Queue is empty!");
@@ -56,13 +60,6 @@ public:
     }
 
 private:
-    T _dequeue(){
-        queue_len--;
-        T val = head->data;
-        temp = head->next;
-        head = temp;
-        return val;
-    }
 
     bool out_of_range(){
         if(length() == 0)

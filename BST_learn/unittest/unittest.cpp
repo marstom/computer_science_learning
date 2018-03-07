@@ -100,12 +100,12 @@ TEST(BST, get_max) {
 }
 
 
-// TEST(BST, get_successor) { 
-//     Tree<int> tree;
-//     fill_example_tree(tree);
-//     int s = tree.get_successor(22);
-//     ASSERT_EQ(33, s);
-// }
+TEST(BST, get_successor) { 
+    Tree<int> tree;
+    fill_example_tree(tree);
+    int s = tree.get_successor(22);
+    ASSERT_EQ(33, s);
+}
 
 TEST(BST, is_binary_search_tree) { 
     Tree<int> tree;

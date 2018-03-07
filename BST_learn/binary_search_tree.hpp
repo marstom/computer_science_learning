@@ -136,7 +136,9 @@ private:
         if(node->data == value){ 
             return true;
         }
-        return is_in_tree(node->smaller, value) | is_in_tree(node->greater, value);
+        bool is_greater = is_in_tree(node->greater, value);
+        bool is_smaller = is_in_tree(node->smaller, value);
+        return is_smaller | is_greater; 
     }
 
     T get_min(BstNode<T>* node){
@@ -199,10 +201,27 @@ private:
         return node;
     }
 
-    // T get_successor(BstNode<T>* node, T value){
-    //     return -1;
-        
-    // }
+    T get_successor(BstNode<T>* node, T value){
+        T temp_value = -1;
+        bool success = 0;
+        if(node == nullptr){
+            return temp_value;
+        }
+        if(node->data == value){ 
+            success = 1;
+            //return node->greater->data;
+        }
+        T is_greater = get_successor(node->greater, value);
+        T is_smaller = get_successor(node->smaller, value);
+        if(success){
+            temp_value = node->greater->data;
+            return value;
+        }
+
+        //return is_smaller | is_greater; 
+        return temp_value;
+     
+    }
 
     bool is_binary_search_tree(BstNode<T>* node){
         if(node == nullptr) return true;

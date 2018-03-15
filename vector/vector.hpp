@@ -10,8 +10,15 @@ public:
         array = new T[m_size]; 
     }
 
-    ~Vector(){
-        delete[] array;
+    Vector(const Vector<T>& vec2){
+        array = new T[vec2.m_size];
+        array = vec2.array;
+        m_index = vec2.m_index;
+        m_size = vec2.m_size;
+    }
+
+    virtual ~Vector(){
+        //delete[] array; //  double free or corruption (fasttop): 0x00000000007a4060
     }
 
     // number of items
@@ -35,7 +42,20 @@ public:
         }
         return *(array+index);
     }
+
+
+    T operator[](int index){
+        return at(index);
+    }
     
+    bool operator==(const Vector<T>& v){
+        for(int i=0; i< m_index; i++){
+            if(v.array[i] != array[i])
+                return false;
+            return true;
+        }
+    }
+
     void push(T item){
         if(m_index == m_size){
             expand();
@@ -78,7 +98,7 @@ public:
     // delete item at index, shifting all trailing elements left
     void del(size_t index){
         for(int i = index; i< m_index -1; i++){
-            array[i] = array[i+1];
+            *(array+i) = *(array+i+1);
         }
         m_index--;
         if(m_index < m_size/4){
@@ -88,7 +108,9 @@ public:
 
     // looks for value and removes index holding it (even if in multiple places)
     void remove(T item){
-    
+        for(int found=find(item);found != -1; found=find(item)){
+            del(found);
+        }
     }
     
     //  looks for value and returns first index with that value, -1 if not found, find first occurence

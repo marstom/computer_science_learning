@@ -31,8 +31,31 @@ void test1(){
     cout << vec.find("Tomek") << endl;
 
 }
+
+void test2(){
+
+    Vector<int> vector;
+    vector.push(2);
+    vector.push(5);
+    vector.push(2);
+    vector.push(7);
+    vector.push(9);
+    vector.push(2);
+    vector.remove(2);
+    Vector<int> vec2 = vector;
+    Vector<int> vec3 = vec2;
+    for(int i=0; i<vec3.size(); i++){
+        cout << vector[i] << endl;
+    }
+
+    cout << "Equal" <<  (vector == vec2) << endl;
+
+
+}
+
 int main(){
-    // test0();
+    test0();
     test1();
+    test2();
     return 0;
 }

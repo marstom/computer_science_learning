@@ -46,15 +46,25 @@ public:
 
     //  inserts item at index, shifts that index's value and trailing elements to the right
     void insert(size_t index, T item){
-
+        if(m_index == m_size){
+            expand();
+        }
+        for(int i = m_index-1; i >= index; i--){
+            *(array+i+1) = *(array+i);
+        }
+        *(array+index) = item;
+        m_index++;
     }
     // can use insert above at index 0
     void prepend(T item){
-        for(size_t i = m_index-1; i >= 0; i--){
+        if(m_index == m_size){
+            expand();
+        }
+        for(int i = m_index-1; i >= 0; i--){
             *(array+i+1) = *(array+i);
         }
-        //*(array) = item;
-        //TODO resize if full
+        *(array) = item;
+        m_index++;
     }
 
     // remove from end, return value
@@ -67,7 +77,13 @@ public:
 
     // delete item at index, shifting all trailing elements left
     void del(size_t index){
-
+        for(int i = index; i< m_index -1; i++){
+            array[i] = array[i+1];
+        }
+        m_index--;
+        if(m_index < m_size/4){
+            shrink();
+        }
     }
 
     // looks for value and removes index holding it (even if in multiple places)
@@ -75,13 +91,14 @@ public:
     
     }
     
-    //  looks for value and returns first index with that value, -1 if not found
+    //  looks for value and returns first index with that value, -1 if not found, find first occurence
     int find(T item){
-
-    }
-
-    void resize(size_t new_capacity){
-
+        for(int i=0; i< m_index; i++){
+            if(array[i] == item){
+                return i;
+            }
+        }
+        return -1;
     }
 
 private:

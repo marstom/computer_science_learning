@@ -1,4 +1,3 @@
-#include <iostream>
 #include <cstdlib>
 #include <cstring>
 #include <stdexcept>
@@ -12,13 +11,13 @@ public:
 
     Vector(const Vector<T>& vec2){
         array = new T[vec2.m_size];
-        array = vec2.array;
+        memcpy(array, vec2.array, sizeof(array));
         m_index = vec2.m_index;
         m_size = vec2.m_size;
     }
 
-    virtual ~Vector(){
-        //delete[] array; //  double free or corruption (fasttop): 0x00000000007a4060
+    ~Vector(){
+        delete[] array; //  double free or corruption (fasttop): 0x00000000007a4060, solved-because no memcpy
     }
 
     // number of items
@@ -100,7 +99,7 @@ public:
     // delete item at index, shifting all trailing elements left
     void del(size_t index){
         if(index >= m_index)
-            throw std::out_of_range("Array has already 0 elements, you cannot pop.");
+            throw std::out_of_range("Selected element is out of range.");
 
         for(int i = index; i < (int)m_index -1; i++){
             *(array+i) = *(array+i+1);

@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/tomek/dev/computer_science_learning/queue/unittest
+CMAKE_SOURCE_DIR = /home/idego/dev/com_science/queue/unittest
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/tomek/dev/computer_science_learning/queue/unittest
+CMAKE_BINARY_DIR = /home/idego/dev/com_science/queue/unittest
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tomek/dev/computer_science_learning/queue/unittest/CMakeFiles /home/tomek/dev/computer_science_learning/queue/unittest/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/idego/dev/com_science/queue/unittest/CMakeFiles /home/idego/dev/com_science/queue/unittest/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tomek/dev/computer_science_learning/queue/unittest/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/idego/dev/com_science/queue/unittest/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

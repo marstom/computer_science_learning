@@ -7,6 +7,7 @@ cmake_minimum_required(VERSION 2.6)
 
 # set c++11 standard
 set (CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -std=c++11") 
  
 # Locate GTest
 find_package(GTest REQUIRED)

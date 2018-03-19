@@ -208,15 +208,15 @@ private:
             return temp_value;
         }
         if(node->data == value){ 
-            success = 1;
-            //return node->greater->data;
+            //success = 1;
+            return node->greater->data;
         }
         T is_greater = get_successor(node->greater, value);
         T is_smaller = get_successor(node->smaller, value);
-        if(success){
-            temp_value = node->greater->data;
-            return value;
-        }
+        //if(success){
+        //    temp_value = node->greater->data;
+        //    return value;
+        // }
 
         //return is_smaller | is_greater; 
         return temp_value;

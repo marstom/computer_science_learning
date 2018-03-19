@@ -44,12 +44,12 @@ public:
     }
 
 
-    T operator[](int index){
+    T operator[](size_t index){
         return at(index);
     }
     
     bool operator==(const Vector<T>& v){
-        for(int i=0; i< m_index; i++){
+        for(int i=0; i< (int)m_index; i++){
             if(v.array[i] != array[i])
                 return false;
             return true;
@@ -89,6 +89,8 @@ public:
 
     // remove from end, return value
     void pop(){
+        if(m_index == 0)
+            throw std::out_of_range("Array has already 0 elements, you cannot pop.");
         m_index--;
         if(m_index < m_size/4){
             shrink();
@@ -97,7 +99,10 @@ public:
 
     // delete item at index, shifting all trailing elements left
     void del(size_t index){
-        for(int i = index; i< m_index -1; i++){
+        if(index >= m_index)
+            throw std::out_of_range("Array has already 0 elements, you cannot pop.");
+
+        for(int i = index; i < (int)m_index -1; i++){
             *(array+i) = *(array+i+1);
         }
         m_index--;
@@ -126,11 +131,14 @@ public:
 private:
 
     void shrink(){
-        T* temp = new T[m_size / 4];
-        memcpy(temp, array, (m_size/4) * sizeof(T));
-        delete[] array;
-        array = temp;
-        m_size /= 4;
+        // shrink until size is 16, not lower
+        if(m_size > 16){
+            T* temp = new T[m_size / 4];
+            memcpy(temp, array, (m_size/4) * sizeof(T));
+            delete[] array;
+            array = temp;
+            m_size /= 4;
+        }
     }
 
 

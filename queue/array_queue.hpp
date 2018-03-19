@@ -27,13 +27,9 @@ public:
     T dequeue(){
         T el = array[head];
         bool success = inc_head();
-        if(success){
-            return el;
-        }
-        else{
+        if(!success)//try catch
             throw std::length_error("Queue is empty.");
-        }
-            
+        return el;
     }
 
     bool empty(){
@@ -41,7 +37,7 @@ public:
     }
 
     bool full(){
-        if(queue_length >= size)
+        if(queue_length == size)
             return true;
         return false;
     }

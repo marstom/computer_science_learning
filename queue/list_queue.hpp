@@ -62,9 +62,7 @@ public:
 private:
 
     bool out_of_range(){
-        if(length() == 0)
-            return true;
-        return false;
+        return length() == 0;
     }
 
     Node<T>* head;

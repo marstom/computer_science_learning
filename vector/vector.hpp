@@ -5,6 +5,8 @@
 template<typename T>
 class Vector{
 public:
+    // static constexpr - for all constats like 16, 0 etc...
+    // todo sentinel
     Vector(): m_size(16), m_index(0){
         array = new T[m_size]; 
     }
@@ -111,6 +113,7 @@ public:
     }
 
     // looks for value and removes index holding it (even if in multiple places)
+    // o^2 correct this
     void remove(T item){
         for(int found=find(item);found != -1; found=find(item)){
             del(found);

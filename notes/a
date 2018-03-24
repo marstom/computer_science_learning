@@ -1,0 +1,3 @@
+stderr to był błąd error out
+terminate called after throwing an instance of 'std::range_error'
+  what():  Index is out of range exception

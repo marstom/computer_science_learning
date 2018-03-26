@@ -13,7 +13,8 @@ using namespace std;
 
 
 TEST(hash_table, hash){
-
+    HashTable<int> ht;
+    ht.hash("tomek");
 }
 
 TEST(hash_table, add){

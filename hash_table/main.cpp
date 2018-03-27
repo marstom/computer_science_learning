@@ -7,10 +7,17 @@ using namespace std;
 int main(){
     HashTable<int> ht;
 
-    cout << ht.hash("Maciek") << endl;
-    cout << ht.hash("Tomek") << endl;
-    cout << ht.hash("Anna") << endl;
-    cout << ht.hash("to jest jakistam napis") << endl;
+    cout << "hashin function tester :P" << endl;
+    cout << ht.hash("a") << endl;
+    cout << ht.hash("b") << endl;
+    cout << ht.hash("c") << endl;
+    cout << ht.hash("d") << endl;
+    cout << ht.hash("kja") << endl;
+    cout << ht.hash("sra") << endl;
+
+    //Bucket<int> bb;
+    //bb.push_back(12);
+
 
 
     return 0;

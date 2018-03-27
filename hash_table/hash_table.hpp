@@ -10,24 +10,25 @@
 #include <string>
 #include <vector>
 #include <stdexcept>
+#include <cstring>
 
 
-template<typename V>
+template<typename T>
 struct Bucket{
     std::string key;
-    V data;
+    T data;
     Bucket* next;
 
 };
 
-template<typename V>
+template<typename T>
 class HashTable{
 public:
 
     HashTable(): num_buckets(ARRAY_SIZE){
-        buckets = new Bucket<V>*[ARRAY_SIZE];
+        buckets = new Bucket<T>*[ARRAY_SIZE];
         for(int i = 0; i<ARRAY_SIZE; i++){
-            buckets[i] = new Bucket<V>();
+            buckets[i] = new Bucket<T>();
         }
     }
 
@@ -36,18 +37,21 @@ public:
     }
 
     int hash(std::string key){
-        int hash = 0;
-        for(size_t i =0; i<key.size(); i++){
-            hash = (hash << 5) + key[i];
-            hash = (hash & hash) % num_buckets; // max value
+        // [(a*k+b) mod p] mod m
+        // a b -randof 0..p-1
+        // p big prime number, must be bigger than ARRAY_SIZE
+        // m table_size
+        int h = 0;
+        for(auto k: key){
+            h += ((3214*k+4357) % 443555) % ARRAY_SIZE;
         }
-        return hash;
+        return h % ARRAY_SIZE;
     }
 
-    void add(std::string key, V value){
+    void add(std::string key, T value){
         keys.push_back(key);
         int index = hash(key);
-        Bucket<V> *b = buckets[index];
+        Bucket<T> *b = buckets[index];
         while(b != nullptr){ // add value to bucket
             if(b->key == key){
                 b->value = value;
@@ -62,7 +66,7 @@ public:
         return true;
     }
 
-    V operator[](std::string key){
+    T operator[](std::string key){
         int k = hash(key);
         return buckets[k];
     }
@@ -75,12 +79,12 @@ public:
     }
 
     void add_bucket(); // helper functions
-    V get_bucket();
+    T get_bucket();
     
 private:
 
     size_t num_buckets; // array size
-    Bucket<V> **buckets;
+    Bucket<T> **buckets;
     std::vector<std::string> keys;
 };
 

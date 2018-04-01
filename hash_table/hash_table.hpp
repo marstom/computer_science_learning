@@ -10,10 +10,8 @@
 #define _A 3214
 #define _B 4357
 #include <string>
-#include <vector>
 #include <stdexcept>
 #include <cstring>
-#include <iostream>
 
 using namespace std;
 
@@ -21,6 +19,7 @@ template<typename T>
 struct Node{
     Node(){
     }
+
     Node(std::string k, T d){
         key = k;
         data = d;
@@ -35,6 +34,10 @@ template<typename T>
 class Bucket{
 public:
     Bucket(): head(nullptr){
+    }
+
+    ~Bucket(){
+        // delete head; //crash
     }
 
     void push_back(std::string key, T el){
@@ -57,7 +60,7 @@ public:
             }
             element = element->next;
         }
-        throw std::length_error("No such element");
+        throw std::range_error("No such element");
     }
 
     void remove(std::string key){
@@ -102,7 +105,6 @@ public:
     }
 
     void add(std::string key, T value){
-        keys.push_back(key);
         int index = hash(key);
         buckets[index].push_back(key, value);
     }
@@ -121,6 +123,9 @@ public:
         T el = b.find(key);
         return el;
     }
+
+    // operator [] // TODO how to do assigment operator with []?? In C#(indexer) it is possible
+
     void remove(std::string key){
         int k = hash(key);
         Bucket<T> b = buckets[k];
@@ -148,10 +153,7 @@ private:
         return h % ARRAY_SIZE;
     }
 
-    int hash_crc16(){}
-
     size_t num_buckets; // array size
     Bucket<T> *buckets;
-    std::vector<std::string> keys;
 };
 

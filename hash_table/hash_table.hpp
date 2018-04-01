@@ -59,18 +59,21 @@ public:
     }
 
     void remove(std::string key){
+        // NOT working TODO
         Node<T>* element = root;
         while(element != nullptr){
-            if(element != nullptr && element->next->key == key){
-                if(element->next != nullptr){
+            if(element->next != nullptr && element->next->key == key){
+                if(element->next->next != nullptr){
                     // this is not last element
-                    element = element->next->next;
+                    // Node<T>* tmp = element->next;
+                    // delete tmp;
+                    element->next = element->next->next;
+                }else{
+                    element->next = nullptr;
                 }
-                delete element->next;
             }
             element = element->next;
         }
-        throw std::length_error("No such element");
     }
 
     bool exists(std::string key){
@@ -137,6 +140,7 @@ private:
 
     int hash(std::string key){
         /*
+            universal hashing
             [(a*k+b) mod p] mod m
             a b -randof 0..p-1
             p big prime number, must be bigger than ARRAY_SIZE

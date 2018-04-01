@@ -55,6 +55,26 @@ TEST(hash_table, remove){
     ASSERT_FALSE(ht.exists("c"));
 }
 
+
+TEST(hash_table, many_keys){
+
+    HashTable<int> ht;
+    ht.add("Tomek", 25);
+    ht.add("Tmk", 35);
+    ht.add("maciek", 5);
+    ht.add("romek", 3);
+    ht.add("kaja", 32);
+    ht.add("anna", 315);
+    ht.add("sad", 225);
+    ht.add("aad", 425);
+    ht.add("sa", 23423);
+    ht.add("a33d", 99);
+    ht.add("sdIm", 88);
+    ht.add("sssd", 35);
+    ht.add("s1d", 32);
+    ht.add("s2d", 5);
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

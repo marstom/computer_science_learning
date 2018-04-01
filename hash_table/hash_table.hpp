@@ -13,7 +13,9 @@
 #include <vector>
 #include <stdexcept>
 #include <cstring>
+#include <iostream>
 
+using namespace std;
 
 template<typename T>
 struct Node{
@@ -32,23 +34,23 @@ struct Node{
 template<typename T>
 class Bucket{
 public:
-    Bucket(): root(nullptr){
+    Bucket(): head(nullptr){
     }
 
     void push_back(std::string key, T el){
-        if(root == nullptr){
-            root = new Node<T>();
+        if(head == nullptr){
+            head = new Node<T>();
         }
-        if(root->key == key){
-            root->data = el;
+        if(head->key == key){
+            head->data = el;
         }
         else{
-            root->next = new Node<T>(key, el);
+            head->next = new Node<T>(key, el);
         }
     }
 
     T find(std::string key){
-        Node<T>* element = root;
+        Node<T>* element = head;
         while(element != nullptr){
             if(element->key == key){
                 return element->data;
@@ -59,25 +61,22 @@ public:
     }
 
     void remove(std::string key){
-        // NOT working TODO
-        Node<T>* element = root;
-        while(element != nullptr){
-            if(element->next != nullptr && element->next->key == key){
-                if(element->next->next != nullptr){
-                    // this is not last element
-                    // Node<T>* tmp = element->next;
-                    // delete tmp;
-                    element->next = element->next->next;
-                }else{
-                    element->next = nullptr;
-                }
+        Node<T> *el = head;
+        Node<T> *prev = el;
+        while(el != nullptr){
+            if(el->key == key){
+                Node<T> *current = el;
+                Node<T> *next = el->next;
+                prev->next = next;
+                delete current;
             }
-            element = element->next;
+            prev = el;
+            el = el->next;
         }
     }
 
     bool exists(std::string key){
-        Node<T>* element = root;
+        Node<T>* element = head;
         while(element != nullptr){
             if(element->key == key){
                 return true;
@@ -87,7 +86,7 @@ public:
         return false;
     }
 private:
-    Node<T> *root;
+    Node<T> *head;
 };
 
 template<typename T>
@@ -110,10 +109,9 @@ public:
 
     bool exists(std::string key){
         // do it by hash TODO
-        for(size_t i=0; i<ARRAY_SIZE-1; i++){
-            if(buckets[i].exists(key))
-                return true;
-        }
+        int k = hash(key);
+        if(buckets[k].exists(key))
+            return true;
         return false;
     }
 
@@ -133,14 +131,11 @@ public:
 
     }
 
-    void add_bucket(){} // helper functions
-    T get_bucket(){}
-    
 private:
 
     int hash(std::string key){
         /*
-            universal hashing
+            universal hashing - from MIT lecture
             [(a*k+b) mod p] mod m
             a b -randof 0..p-1
             p big prime number, must be bigger than ARRAY_SIZE
@@ -152,6 +147,8 @@ private:
         }
         return h % ARRAY_SIZE;
     }
+
+    int hash_crc16(){}
 
     size_t num_buckets; // array size
     Bucket<T> *buckets;

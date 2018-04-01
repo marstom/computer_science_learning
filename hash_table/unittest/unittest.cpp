@@ -55,6 +55,24 @@ TEST(hash_table, remove){
     ASSERT_FALSE(ht.exists("c"));
 }
 
+TEST(hash_table, remove2){
+    HashTable<int> ht;
+    ht.add("a", 232);
+    ht.add("b", 26);
+    ht.add("c", 232);
+    ht.add("d", 232);
+    ht.add("a", 7777);
+    ASSERT_TRUE(ht.exists("c"));
+    ht.remove("c"); 
+    ht.remove("a");
+    ht.remove("b");
+    ht.remove("d");
+    ASSERT_FALSE(ht.exists("c"));
+    ht.add("Tomek", 7777);
+    ht.add("a", 24352);
+    ASSERT_TRUE(ht.exists("a"));
+}
+
 
 TEST(hash_table, many_keys){
 

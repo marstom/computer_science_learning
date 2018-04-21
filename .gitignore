@@ -10,4 +10,6 @@
 **/cmake_install.cmake
 tags
 **/unittest/Makefile
+__pycache__/
+.pytest_cache/
 

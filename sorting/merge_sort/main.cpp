@@ -2,15 +2,9 @@
 #include <cstdio>
 #include <vector>
 #include <cstring>
-#include <fstream>
 #include "merge_sort.hpp"
 using namespace std;
 
-
-void sv_img(){
-
-
-}
 int main(){
     int arr[] = {4,3,2,1,9,12,91,43,5,0};
     Mergesort<int> sorted(arr, 10);

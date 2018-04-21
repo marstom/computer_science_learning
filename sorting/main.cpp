@@ -2,81 +2,24 @@
 #include <cstdio>
 #include <vector>
 #include <cstring>
+#include <fstream>
+#include "merge_sort.hpp"
 using namespace std;
 
 
+void sv_img(){
 
-class Mergesort{
 
-public:
-    Mergesort(int *ta, int size){
-        N = size;
-        t = new int[N];
-        //tab = ta;
-        tab = new int[N];
-        //std::copy(ta[0], ta[N-1], tab);
-        memcpy(tab, ta, N*sizeof(int));
-        merge_sort(0, N-1);
-    }
-
-    void merge(int begin, int middle, int end){
-        int i, j, q;
-        for(i = begin; i<=end; i++){
-            t[i] = tab[i];
-        }
-        i = begin;
-        j = middle+1;
-        q = begin;
-
-        while(i <= middle && j <=end){
-            if(t[i]<t[j]){
-                tab[q++] = t[i++];
-            }else{
-                tab[q++] = t[j++];
-            }
-        }
-
-        while(i <= middle){
-            tab[q++] = t[i++];
-        }
-    }
-
-    void merge_sort(int begin, int end){
-        int middle;
-        if(begin < end){
-            middle = (begin + end)/2;
-            merge_sort(begin, middle);
-            merge_sort(middle + 1, end);
-            merge(begin, middle, end);
-        }
-    }
-
-void print_arr(){
-    for(int i=0; i<N; i++){
-        cout << tab[i] << endl;
-    }
 }
-
-private:
-    int N;
-    int *tab;
-    int *t;
-
-
-};
-
-
-void print_arr(int *arr){
-    for(int i=0; i<4; i++){
-        cout << arr[i] << endl;
-    }
-}
-
-
 int main(){
-    int arr[] = {4,3,2,1,9,12};
-    Mergesort sorted(arr, 6);
+    int arr[] = {4,3,2,1,9,12,91,43,5,0};
+    Mergesort<int> sorted(arr, 10);
     sorted.print_arr();
+//    print_arr(arr, 6);
 
+    char* napis = strdup("To jest napis w c! Do posortowania. Strdup sprawia ze nie jest const i mozna go modyfikowac.");
+    // char* napis = strdup("Tomek !!!");
+    Mergesort<char> sor(napis, strlen(napis));
+    sor.print_arr();
     return 0;
 }
